@@ -5,4 +5,4 @@
 #include "Player.h"
 using namespace std;
 Opponent opponent;
-Player player;i
+Player player;
