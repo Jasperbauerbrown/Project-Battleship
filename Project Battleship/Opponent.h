@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 using namespace std;
-class Opponent;
-{
+class Opponent {
+public:
 	int shipsx[6];
 	int shipsy[6];
 	vector <int> guessx();
