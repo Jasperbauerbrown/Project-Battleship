@@ -6,8 +6,8 @@ using namespace std;
 class Player
 {
 public:
-	int shipsx[6];
-	int shipsy[6];
+	int shipsx[5];
+	int shipsy[5];
 	vector <int> guessx();
 	vector <int> guessy();
 };
