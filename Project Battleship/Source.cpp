@@ -64,18 +64,22 @@ int main() {
 			} while (range == false);
 			new1 = true;
 			new2 = true;
-			for (int j = 0; j < 5; j++) {
-				if (temp1 == player.shipsx[j]) {
+			int t = 0;
+			do {
+				if (temp1 == player.shipsx[t]) {
 					new1 = false;
 				}
+				else {
+					new1 = true;
+				}
 				if (new1 == false) {
-					for (int l = 0; l < 5; l++) {
-						if (temp2 == player.shipsy[l]) {
-							new2 = false;
-						}
+					if (temp2 == player.shipsy[t]) {
+						new2 = false;
+						cout << "You already used that position.  Please enter a new position." << endl;
 					}
 				}
-			}
+				t++;
+			} while (t < i);
 		} while (new2 == false);
 		player.shipsx[i] = temp1;
 		player.shipsy[i] = temp2;
@@ -83,4 +87,36 @@ int main() {
 	for (int i = 0; i < 5; i++) {
 		cout << player.shipsx[i] << " " << player.shipsy[i] << endl;
 	}
+	const int BOARD_SIZE = 5;
+	string board[BOARD_SIZE][BOARD_SIZE];
+	string insert;
+	char letter;
+	for (int x = 0; x < BOARD_SIZE; x++)
+	{
+		int number = 1;
+		if (x == 0) letter = 'A';
+		else if (x == 1) letter = 'B';
+		else if (x == 2) letter = 'C';
+		else if (x == 3) letter = 'D';
+		else if (x == 4) letter = 'E';
+		for (int y = 0; y < BOARD_SIZE; y++)
+		{
+			insert = to_string(number).c_str()[0];
+			board[x][y] = letter + insert;
+			number++;
+		}
+	}
+
+	cout << "--------------------------" << endl;
+	for (int x = 0; x < BOARD_SIZE; x++)
+	{
+		for (int y = 0; y < BOARD_SIZE; y++)
+		{
+			if (y == 0) cout << "|";
+			cout << " " << board[x][y] << " |";
+		}
+		cout << "\n--------------------------\n";
+	}
+
+	return 0;
 }
