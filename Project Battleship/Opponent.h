@@ -7,6 +7,8 @@
 using namespace std;
 class Opponent {
 public:
+	Opponent();
+	~Opponent();
 	int shipsx[5];
 	int shipsy[5];
 	vector <int> guessx;
