@@ -2,7 +2,7 @@
 
 Opponent::Opponent();
 Opponent::~Opponent();
-int runGuess(int guessNum)
+void runGuess(int guessNum)
 {
     srand((unsigned)time(0));
     do
@@ -10,6 +10,14 @@ int runGuess(int guessNum)
         tryAgain = false;
         xGuess = ((rand() % 4) + 1);
         yGuess = ((rand() % 4) + 1);
-        if (guessx[guessNum] == xGuess && guessy[guessNum] == yGuess) tryAgain = true;
+        if (guessNum > 0)
+        {
+            for (int i = guessNum; i >= 0; i--)
+            {
+                if (guessx[i] == xGuess && guessy[i] == yGuess) tryAgain = true;
+            }
+        }
     }while(tryAgain = true)
+    guessx[guessNum] = xGuess;
+    guessy[guessNum] = yGuess;
 }
