@@ -6,15 +6,17 @@ void Opponent::runGuess(int guessNum)
     srand((unsigned)time(0));
     do
     {
-        opponent.tryAgain = false;
-        opponent.xGuess = ((rand() % 4) + 1);
-        opponent.yGuess = ((rand() % 4) + 1);
+        tryAgain = false;
+        xGuess = ((rand() % 4) + 1);
+        yGuess = ((rand() % 4) + 1);
         if (guessNum > 0)
         {
             for (int i = guessNum; i >= 0; i--)
             {
-                if (opponent.xGuess == opponent.guessx[i] && opponent.yGuess == opponent.guessy[i]) opponent.tryAgain = true;
+                if (xGuess == guessx[i] && yGuess == guessy[i]) tryAgain = true;
             }
         }
-    } while (opponent.tryAgain == true);
+    } while (tryAgain == true);
+    guessx[guessNum] = xGuess;
+    guessy[guessNum] = yGuess;
 }
