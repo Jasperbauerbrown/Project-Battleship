@@ -5,10 +5,10 @@
 #include <string>
 #include <vector>
 using namespace std;
-class Opponent {
+class opponent {
 public:
-	Opponent();
-	~Opponent();
+	opponent();
+	~opponent();
 	int shipsx[5];
 	int shipsy[5];
 	vector <int> guessx;
