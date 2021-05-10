@@ -10,7 +10,6 @@ private:
 	int xGuess;
 	int yGuess;
 	bool tryAgain;
-	bool hit;
 public:
 	Opponent();
 	~Opponent();
@@ -18,6 +17,6 @@ public:
 	int shipsy[5];
 	vector <int> guessx();
 	vector <int> guessy();
-	int runGuess(int);
+	void runGuess(int);
 };
 #endif
