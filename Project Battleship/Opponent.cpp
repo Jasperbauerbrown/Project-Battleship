@@ -1,6 +1,7 @@
 #include "Opponent.h"
-Opponent opponent;
-void runGuess(int guessNum)
+Opponent::opponent();
+Opponent::~opponent();
+void Opponent::runGuess(int guessNum)
 {
     srand((unsigned)time(0));
     do
