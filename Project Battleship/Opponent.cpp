@@ -1,23 +1,19 @@
 #include "Opponent.h"
-
-Opponent::Opponent();
-Opponent::~Opponent();
+Opponent opponent;
 void runGuess(int guessNum)
 {
     srand((unsigned)time(0));
     do
     {
-        tryAgain = false;
-        xGuess = ((rand() % 4) + 1);
-        yGuess = ((rand() % 4) + 1);
+        opponent.tryAgain = false;
+        opponent.xGuess = ((rand() % 4) + 1);
+        opponent.yGuess = ((rand() % 4) + 1);
         if (guessNum > 0)
         {
             for (int i = guessNum; i >= 0; i--)
             {
-                if (guessx[i] == xGuess && guessy[i] == yGuess) tryAgain = true;
+                if (opponent.xGuess == opponent.guessx[i] && opponent.yGuess == opponent.guessy[i]) opponent.tryAgain = true;
             }
         }
-    }while(tryAgain = true)
-    guessx[guessNum] = xGuess;
-    guessy[guessNum] = yGuess;
+    } while (opponent.tryAgain == true);
 }

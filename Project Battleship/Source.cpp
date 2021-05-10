@@ -21,20 +21,12 @@ int main() {
 			temp1 = ((rand() % 4) + 1);
 			temp2 = ((rand() % 4) + 1);
 			new1 = true;
-			new2 = true;
 			for (int j = 0; j < 5; j++) {
-				if (temp1 == opponent.shipsx[j]) {
+				if (temp1 == opponent.shipsx[j] && temp2 == opponent.shipsy[j]) {
 					new1 = false;
 				}
-				if (new1 == false) {
-					for (int l = 0; l < 5; l++) {
-						if (temp2 == opponent.shipsy[l]) {
-							new2 = false;
-						}
-					}
-				}
 			}
-		} while (new2 == false);
+		} while (new1 == false);
 		opponent.shipsx[i] = temp1;
 		opponent.shipsy[i] = temp2;
 	}
@@ -62,24 +54,13 @@ int main() {
 					cout << "Incorrect value.  Please use value between 1 and 6." << endl;
 				}
 			} while (range == false);
-			new1 = true;
 			new2 = true;
-			int t = 0;
-			do {
-				if (temp1 == player.shipsx[t]) {
-					new1 = false;
+			for (int t = 0; t < i; t++) {
+				if (temp1 == player.shipsx[t] && temp2 == player.shipsy[t]) {
+					new2 = false;
+					cout << "You already used that position.  Please enter a new position." << endl;
 				}
-				else {
-					new1 = true;
-				}
-				if (new1 == false) {
-					if (temp2 == player.shipsy[t]) {
-						new2 = false;
-						cout << "You already used that position.  Please enter a new position." << endl;
-					}
-				}
-				t++;
-			} while (t < i);
+			}
 		} while (new2 == false);
 		player.shipsx[i] = temp1;
 		player.shipsy[i] = temp2;
