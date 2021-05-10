@@ -48,8 +48,8 @@ int main() {
 			do {
 				range = true;
 				cout << "Y for ship " << i + 1 << endl;
-				cin >> temp1;
-				if (temp1 < 0 || temp1 > 5) {
+				cin >> temp2;
+				if (temp2 < 0 || temp2 > 5) {
 					range = false;
 					cout << "Incorrect value.  Please use value between 1 and 6." << endl;
 				}
