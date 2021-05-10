@@ -1,7 +1,7 @@
 #include "Opponent.h"
-Opponent::Opponent(){}
-Opponent::~Opponent(){}
-void Opponent::runGuess(int guessNum)
+opponent::opponent(){}
+opponent::~opponent(){}
+void opponent::runGuess(int guessNum)
 {
     srand((unsigned)time(0));
     do
@@ -17,6 +17,6 @@ void Opponent::runGuess(int guessNum)
             }
         }
     } while (tryAgain == true);
-    guessx[guessNum] = xGuess;
-    guessy[guessNum] = yGuess;
+    guessx.push_back(xGuess);
+    guessy.push_back(yGuess);
 }
