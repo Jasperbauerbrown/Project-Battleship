@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 opponent opponent;
-player player;
+Player player;
 gameBoard board1;
 gameBoard board2;
 string contString;
