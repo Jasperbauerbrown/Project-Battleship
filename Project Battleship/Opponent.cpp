@@ -20,3 +20,11 @@ void opponent::runGuess(int guessNum)
     guessx.push_back(xGuess);
     guessy.push_back(yGuess);
 }
+int opponent::returnGuessx(int guessNum)
+{
+    return guessx[guessNum];
+}
+int opponent::returnGuessy(int guessNum)
+{
+    return guessy[guessNum];
+}
