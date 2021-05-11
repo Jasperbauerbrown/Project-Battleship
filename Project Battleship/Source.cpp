@@ -19,8 +19,8 @@ int main() {
     srand((unsigned)time(0));
     for (int i = 0; i < 5; i++) {
         do {
-            temp1 = ((rand() % 4) + 1);
-            temp2 = ((rand() % 4) + 1);
+            temp1 = ((rand() % 5));
+            temp2 = ((rand() % 5));
             new1 = true;
             for (int j = 0; j < 5; j++) {
                 if (temp1 == opponent.shipsx[j] && temp2 == opponent.shipsy[j]) {
@@ -37,6 +37,10 @@ int main() {
         board1.addShips(opponent.shipsx[i], opponent.shipsy[i]);
     }
 
+    cout << system("clear") << "------------------------------------------------" << endl << "             WELCOME TO BATTLESHIP" << endl
+    << "------------------------------------------------" << endl << "BEGIN BY ENTERING THE COORDINATES FOR YOUR SHIPS" << endl
+    << "------------------------------------------------" << endl;
+	
     for (int i = 0; i < 5; i++) {
         cout << "Enter new set of numbers for ship " << i + 1 << endl;
         do {
