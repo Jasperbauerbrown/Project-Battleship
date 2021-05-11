@@ -4,100 +4,137 @@
  * 
  * Jasper:  Added computer ship generator and player ship input.
  */
-#include "Player.h"
+#include "board.h"
+#include <string>
 using namespace std;
-Opponent opponent;
-Player player;
-int temp1;
-int temp2;
-bool new1 = true;
-bool new2 = true;
-bool range = true;
+opponent opponent;
+player player;
+gameBoard board1;
+gameBoard board2;
+string contString;
+int temp1, temp2, playerGuessX, playerGuessY, guessNum = 0;
+bool new1 = true, new2 = true, range = true, exitBool, withinBounds, winner;
 
 int main() {
-	srand((unsigned)time(0));
-	for (int i = 0; i < 5; i++) {
-		do {
-			temp1 = ((rand() % 4) + 1);
-			temp2 = ((rand() % 4) + 1);
-			new1 = true;
-			for (int j = 0; j < 5; j++) {
-				if (temp1 == opponent.shipsx[j] && temp2 == opponent.shipsy[j]) {
-					new1 = false;
-				}
-			}
-		} while (new1 == false);
-		opponent.shipsx[i] = temp1;
-		opponent.shipsy[i] = temp2;
-	}
-	for (int i = 0; i < 5; i++) {
-		cout << opponent.shipsx[i] << " " << opponent.shipsy[i] << endl;
-	}
-	for (int i = 0; i < 5; i++) {
-		cout << "Enter new set of numbers for ship " << i + 1 << endl;
-		do {
-			do {
-				range = true;
-				cout << "X for ship " << i + 1 << endl;
-				cin >> temp1;
-				if (temp1 < 0 || temp1 > 5) {
-					range = false;
-					cout << "Incorrect value.  Please use value between 1 and 6." << endl;
-				}
-			} while (range == false);
-			do {
-				range = true;
-				cout << "Y for ship " << i + 1 << endl;
-				cin >> temp2;
-				if (temp2 < 0 || temp2 > 5) {
-					range = false;
-					cout << "Incorrect value.  Please use value between 1 and 6." << endl;
-				}
-			} while (range == false);
-			new2 = true;
-			for (int t = 0; t < i; t++) {
-				if (temp1 == player.shipsx[t] && temp2 == player.shipsy[t]) {
-					new2 = false;
-					cout << "You already used that position.  Please enter a new position." << endl;
-				}
-			}
-		} while (new2 == false);
-		player.shipsx[i] = temp1;
-		player.shipsy[i] = temp2;
-	}
-	for (int i = 0; i < 5; i++) {
-		cout << player.shipsx[i] << " " << player.shipsy[i] << endl;
-	}
-	const int BOARD_SIZE = 5;
-	string board[BOARD_SIZE][BOARD_SIZE];
-	string insert;
-	char letter;
-	for (int x = 0; x < BOARD_SIZE; x++)
-	{
-		int number = 1;
-		if (x == 0) letter = 'A';
-		else if (x == 1) letter = 'B';
-		else if (x == 2) letter = 'C';
-		else if (x == 3) letter = 'D';
-		else if (x == 4) letter = 'E';
-		for (int y = 0; y < BOARD_SIZE; y++)
-		{
-			insert = to_string(number).c_str()[0];
-			board[x][y] = letter + insert;
-			number++;
-		}
-	}
+    srand((unsigned)time(0));
+    for (int i = 0; i < 5; i++) {
+        do {
+            temp1 = ((rand() % 4) + 1);
+            temp2 = ((rand() % 4) + 1);
+            new1 = true;
+            for (int j = 0; j < 5; j++) {
+                if (temp1 == opponent.shipsx[j] && temp2 == opponent.shipsy[j]) {
+                    new1 = false;
+                }
+            }
+        } while (new1 == false);
+        opponent.shipsx[i] = temp1;
+        opponent.shipsy[i] = temp2;
+    }
 
-	cout << "--------------------------" << endl;
-	for (int x = 0; x < BOARD_SIZE; x++)
-	{
-		for (int y = 0; y < BOARD_SIZE; y++)
-		{
-			if (y == 0) cout << "|";
-			cout << " " << board[x][y] << " |";
-		}
-		cout << "\n--------------------------\n";
-	}
+    for (int i = 0; i < 5; i++)
+    {
+        board1.addShips(opponent.shipsx[i], opponent.shipsy[i]);
+    }
 
-	return 0;
+    for (int i = 0; i < 5; i++) {
+        cout << "Enter new set of numbers for ship " << i + 1 << endl;
+        do {
+            do {
+                range = true;
+                cout << "X for ship " << i + 1 << endl;
+                cin >> temp1;
+                if (temp1 <= 0 || temp1 > 5) {
+                    range = false;
+                    cout << "Incorrect value.  Please use value between 1 and 5." << endl;
+                }
+            } while (range == false);
+            do {
+                range = true;
+                cout << "Y for ship " << i + 1 << endl;
+                cin >> temp2;
+		               if (temp2 <= 0 || temp2 > 5) {
+                    range = false;
+                    cout << "Incorrect value.  Please use value between 1 and 5." << endl;
+                }
+            } while (range == false);
+            new2 = true;
+            for (int t = 0; t < i; t++) {
+                if ((temp2 - 1) == player.shipsx[t] && (temp1 - 1) == player.shipsy[t]) {
+                    new2 = false;
+                    cout << "You already used that position.  Please enter a new position." << endl;
+                }
+            }
+        } while (new2 == false);
+        player.shipsx[i] = (temp2 - 1);
+        player.shipsy[i] = (temp1 - 1);
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        board2.addShips(player.shipsx[i], player.shipsy[i]);
+    }
+
+    cout << system("clear") << endl << "This is your board (your ships are marked by XX): " << endl;
+    board2.printBoard(false);
+
+    cout << endl << endl << "And this is your opponents board: " << endl;
+    board1.printBoard(true);
+    cout << endl << "Press enter to continue";
+    cin.ignore();
+    getline(cin, contString);
+    cout << system("clear");
+
+    do
+    {
+        do
+        {
+            withinBounds = false;
+            cout << "Please enter the X coordinate of your guess (1-5)" << endl;
+            cin >> playerGuessX;
+            if (playerGuessX > 0 && playerGuessX < 6) withinBounds = true;
+            else cout << "Please enter a valid coordinate" << endl;
+        }while(withinBounds == false);
+        do
+        {
+		withinBounds = false;
+            cout << "Please enter the Y coordinate of your guess (1-5)" << endl;
+            cin >> playerGuessY;
+            if (playerGuessY > 0 && playerGuessY < 6) withinBounds = true;
+            else cout << "Please enter a valid coordinate" << endl;
+        }while(withinBounds == false);
+        if (board1.guess(playerGuessY - 1, playerGuessX - 1) == true)
+        {
+            exitBool = true;
+            winner = true;
+        }
+        board1.printBoard(true);
+
+        cout << "Your opponent will now guess" << endl;
+        opponent.runGuess(guessNum);
+        if (board2.guess(opponent.returnGuessx(guessNum), opponent.returnGuessy(guessNum)) == true)
+        {
+            exitBool = true;
+            winner = false;
+        }
+        board2.printBoard(false);
+        cout << endl << "Press enter to continue";
+        cin.ignore();
+        getline(cin, contString);
+        cout << system("clear");
+
+        guessNum++;
+    }while(exitBool == false);
+
+    if (winner == true)
+    {
+        cout << "You win!" << endl << "Press enter to exit";
+        getline(cin, contString);
+    }
+    else
+    {
+        cout << "You lost!" << endl << "Press enter to exit";
+        getline(cin, contString);
+    }
+    return 0;
 }
